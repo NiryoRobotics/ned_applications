@@ -1,0 +1,14 @@
+# You can modify this file to adjust your tic tac toe application
+
+# Name of your workspace
+workspace_name: default_ws
+
+# Z offset above the workspace for picking
+global_z_offset: 0.00
+
+# Poses [x, y, z, roll, pitch, yaw]
+observation_pose: [0.137, 0., 0.299, -1.63, 1.389, 0.134]
+cheat_pose: [0.137, 0., 0.299, -1.63, 1.389, 0.134]
+
+# Joints poses
+sleep_joints: [0.0, 0.55, -1.2, 0.0, 0.0, -1.437]
