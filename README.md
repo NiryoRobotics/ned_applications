@@ -1,4 +1,3 @@
 # Application
 
-#TODO
-Documentation is available [here](https://www.docs.niryo.com).
+Documentation is available [here](https://docs.niryo.com/).

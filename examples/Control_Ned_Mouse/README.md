@@ -1,4 +1,3 @@
 # Application exemples: Control Ned with a mouse
 
-#TODO
-Documentation is available [here](https://www.docs.niryo.com).
+Documentation is available [here](https://www.docs.niryo.com/applications/ned/examples/control_ned_mouse).
