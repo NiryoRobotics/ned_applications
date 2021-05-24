@@ -1,3 +1,3 @@
 # Application
 
-Documentation is available [here](https://docs.niryo.com/).
+Documentation is available [here](https://docs.niryo.com/applications).

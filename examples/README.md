@@ -1,3 +1,3 @@
 # Application exemples
 
-Documentation is available [here](https://docs.niryo.com/applications/ned/examples).
+Documentation is available [here](https://docs.niryo.com/applications/ned/source/examples/index.html).
