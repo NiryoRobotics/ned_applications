@@ -1,0 +1,24 @@
+<launch>
+  <group ns="niryo_robot/niryo_robot_webots">
+        <param name="status" type="int" value="0"/>
+  </group>
+
+  <!-- start Webots -->
+  <env name="ROSCONSOLE_CONFIG_FILE"
+        value="$(find niryo_robot_webots)/config/niryo_webots_trace.conf" />
+
+  <arg name="no_gui" default="false," doc="Start Webots with minimal GUI"/>
+  <include file="$(find niryo_robot_webots)/launch/webots.launch">
+    <arg name="mode" value="realtime"/>
+    <arg name="no_gui" value="$(arg no_gui)"/>
+    <arg name="world" value="$(find niryo_robot_webots)/worlds/ned.wbt"/>
+  </include>
+
+  <arg name="duration" default="20" doc="Duration in seconds"/>
+  <arg name="auto_close" default="false" doc="Startup mode"/>
+  <node name="webots_node" pkg="niryo_robot_webots" type="webots_node" args="$(arg duration)" required="$(arg auto_close)" output="screen"/>
+ 
+  <node name="send_webots_command" pkg="niryo_robot_webots" type="send_webots_command.py" output="screen"></node>
+
+  
+</launch>

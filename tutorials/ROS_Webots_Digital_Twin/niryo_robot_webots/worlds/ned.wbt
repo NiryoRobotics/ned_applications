@@ -1,0 +1,319 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  basicTimeStep 16
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.001946889993036387 0.981706392340814 0.19039109447802074 3.146244570674049
+  position 0.3112176689165387 2.7106512325641967 1.0712008818453862
+  followType "None"
+}
+TexturedBackground {
+  texture "empty_office"
+}
+TexturedBackgroundLight {
+  texture "empty_office"
+}
+Floor {
+  translation -3 0 6
+  name "floor(2)"
+  size 14 13
+  appearance Parquetry {
+    type "dark strip"
+  }
+}
+SoccerBall {
+  translation -1.24 0.11252911999999977 10.18
+  name "soccer ball(1)"
+}
+Can {
+  translation 0.02840087849328704 0.8010656649999998 4.588636654572984
+  rotation 3.1941231743419434e-12 1 1.4727653023111148e-11 -5.790917298871305e-06
+}
+Can {
+  translation 1.71 0.8010656649999998 4.87
+  rotation -6.636251436647064e-11 1 -2.179371254023518e-12 -2.3163669032979848e-06
+  name "can(2)"
+}
+Can {
+  translation -2.09 0.8010656649999998 4.58
+  rotation -4.2973415676112386e-11 1 4.394303047216482e-11 -2.3163669029606607e-06
+  name "can(1)"
+}
+OfficeChair {
+  hidden position_0_0 -2.0187135383171846e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation -0.2053177701577187 -6.448501605915702e-05 3.7373990495472023
+  rotation 0.0005317202226110495 0.9999998580093025 3.542569581258853e-05 -0.11875126147606402
+}
+Ned {
+  hidden position_0_0 3.6974148073584033e-08
+  hidden rotation_1 0 0 1 4.2146848510894035e-08
+  hidden position_1_0 -0.5000002854328276
+  hidden rotation_2 0.24015224397982862 -0.9405115355523237 -0.240343402664735 1.6312944270445604
+  hidden position_2_0 1.2500004459909835
+  hidden rotation_3 0 0 0.9999999999999999 1.2500004459909837
+  hidden position_3_0 3.9666481665799235e-07
+  hidden rotation_4 -0.5775033814417686 -0.5775031523663793 -0.577044152063096 2.0934747711069908
+  hidden position_4_0 -9.351781571353968e-09
+  hidden rotation_5 -0.00039799526106832576 -0.9999998415997596 0.0003979952610612428 1.570795999996278
+  hidden position_5_0 -0.05000001532868384
+  hidden rotation_6 -0.024989592909060963 0.9993748275487278 -0.025009484364737912 1.5706253678697244
+  hidden position_7_0 -2.35879819724378e-09
+  hidden position_7_1 2.3612991867658826e-09
+  hidden translation_8 0.01455 -0.07959999999999057 0.009613997641201803
+  hidden translation_9 0.01455 -0.07959999999999055 -0.011066002361299187
+  translation 0.513432 0.739997 4.40242
+  rotation 0.8628559982596194 0.35740699927911007 0.35740699927911007 -1.7177753071795863
+  controller "ros"
+}
+OfficeChair {
+  hidden position_0_0 -2.0187006826401197e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation -0.19000000001552794 -6.448501605915702e-05 7.610000001108041
+  rotation 0.9999744334753419 -3.98205214150088e-06 0.007150690862586706 -6.324525515359296e-05
+  name "office chair(10)"
+}
+OfficeChair {
+  hidden position_0_0 -2.0187006820692e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation -1.6900000000155342 -6.448501605915702e-05 3.780000001108013
+  rotation 0.9999744334753957 -3.967871235438679e-06 0.007150690862958954 -6.324525515356064e-05
+  name "office chair(5)"
+}
+OfficeChair {
+  hidden position_0_0 -2.018700681910327e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation -1.690000000015535 -6.448501605915702e-05 7.650000001108039
+  rotation 0.999974433475343 -3.982053097542916e-06 0.007150690862433722 -6.324525515356381e-05
+  name "office chair(11)"
+}
+OfficeChair {
+  hidden position_0_0 -2.0187006821790276e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation 1.3599999996941037 -6.448501605918477e-05 3.750000001064324
+  rotation 0.0002399692471868133 0.9999999706516213 3.333942496540535e-05 -0.2617952842328193
+  name "office chair(1)"
+}
+OfficeChair {
+  hidden position_0_0 -2.0187006818786752e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation 1.3599999999844654 -6.448501605918477e-05 7.630000001108035
+  rotation 0.9999744334802032 -2.32277694703088e-06 0.007150690914265524 -6.324525515326444e-05
+  name "office chair(9)"
+}
+Door {
+  hidden translation_5 7.779416000275319e-11 0 0.0010000002480014258
+  translation -3.62 0.02 10.1
+  rotation 0 1 0 1.5707963
+  position -5.105594413182705e-08
+  doorAppearance GlossyPaint {
+    baseColor 0.16 0.16 0.16
+  }
+  frameAppearance GlossyPaint {
+    baseColor 0.35 0.3503166247043564 0.35
+  }
+}
+Floor {
+  translation 0 3 4.22
+  rotation 0 0 1 3.1415926
+  size 20 16.4
+  tileSize 1 1
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "textures/asphalt.jpg"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+Table {
+  translation -0.238828 0 8.77029
+  name "table(1)"
+  size 4.5 0.74 1.5
+  trayAppearance VarnishedPine {
+    colorOverride 0.85 0.8 0.808
+    textureTransform TextureTransform {
+      scale 10 10
+    }
+  }
+  legAppearance VarnishedPine {
+    colorOverride 0.85 0.8 0.8
+    textureTransform TextureTransform {
+      scale 4 5
+    }
+  }
+}
+Table {
+  translation -0.238828 0 4.85029
+  name "table(2)"
+  size 4.5 0.74 1.5
+  trayAppearance VarnishedPine {
+    colorOverride 0.85 0.8 0.808
+    textureTransform TextureTransform {
+      scale 10 10
+    }
+  }
+  legAppearance VarnishedPine {
+    colorOverride 0.85 0.8 0.8
+    textureTransform TextureTransform {
+      scale 4 5
+    }
+  }
+}
+Monitor {
+  translation 1.28187 0.75 8.54238
+  rotation 0 1 0 -5.307179586466759e-06
+  name "monitor(7)"
+}
+Monitor {
+  translation -1.67813 0.75 8.39238
+  rotation 0 1 0 -5.307179586466759e-06
+  name "monitor(8)"
+}
+Monitor {
+  translation 1.42187 0.75 5.37238
+  rotation 0 1 0 3.14159
+  name "monitor(3)"
+}
+Monitor {
+  translation 1.75187 0.75 4.54238
+  rotation 0 1 0 -1.5707953071795862
+  name "monitor(10)"
+}
+Monitor {
+  translation 0.11187 0.75 5.37238
+  rotation 0 1 0 3.14159
+  name "monitor(4)"
+}
+Monitor {
+  translation -1.59813 0.75 5.37238
+  rotation 0 1 0 3.14159
+  name "monitor(9)"
+}
+Monitor {
+  translation -0.25813 0.75 9.12238
+  rotation 0 1 0 3.14159
+  name "monitor(5)"
+}
+Monitor {
+  translation -1.74813 0.75 9.12238
+  rotation 0 1 0 3.14159
+  name "monitor(6)"
+}
+Monitor {
+  translation -0.25813 0.75 4.42238
+  rotation 0 -1 0 5.307156870259904e-06
+  name "monitor(1)"
+}
+Monitor {
+  translation -1.67813 0.75 4.42238
+  rotation 0 -1 0 5.307156870259904e-06
+  name "monitor(2)"
+}
+Wall {
+  translation -0.88 0 11.48
+  name "wall(3)"
+  size 8 3 0.2
+  appearance Roughcast {
+    textureTransform TextureTransform {
+      scale 7 1.83
+    }
+  }
+}
+Wall {
+  translation -0.88 0 0.25
+  name "wall(1)"
+  size 8 3 0.2
+  appearance Roughcast {
+    textureTransform TextureTransform {
+      scale 7 1.83
+    }
+  }
+}
+Wall {
+  translation 3.04997 0 5.88017
+  rotation 0 -1 0 4.7123353
+  name "wall(2)"
+  size 11.4 3 0.2
+  appearance Roughcast {
+    textureTransform TextureTransform {
+      scale 7 1.83
+    }
+  }
+}
+Wall {
+  translation -3.55003 0 5.88051
+  rotation 0 -1 0 4.7123353
+  name "wall(4)"
+  size 11.4 3 0.2
+  appearance Roughcast {
+    textureTransform TextureTransform {
+      scale 7 1.83
+    }
+  }
+}
+OfficeChair {
+  hidden position_0_0 -2.0187006819234866e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation -1.7799999995527982 -6.448501605921253e-05 5.9599999927703555
+  rotation 4.389182270319002e-06 -0.9999999994913387 -3.159204958357996e-05 -2.879795306911273
+  name "office chair(2)"
+}
+OfficeChair {
+  hidden position_0_0 -2.018700683545678e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation 1.4999999998653182 -6.448501605918477e-05 5.9599999927586005
+  rotation 3.9369349974650644e-06 0.9999999994913387 3.165158859748414e-05 -2.8797953067150126
+  name "office chair(3)"
+}
+OfficeChair {
+  hidden position_0_0 -2.0187006828326393e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation 1.2799999997240201 -6.448501605915702e-05 9.939999998924028
+  rotation 3.936934997495669e-06 0.9999999994913387 3.1651588597484736e-05 -2.879795306715009
+  name "office chair(6)"
+}
+OfficeChair {
+  hidden position_0_0 -2.0187006827505474e-06
+  hidden rotation_1 0 -1 0 2.0186536576601052e-06
+  translation -0.3399999999844819 -6.448501605915702e-05 9.939999998891762
+  rotation -2.261655897591146e-07 0.9999999995000048 3.16218187908448e-05 3.141590000248261
+  name "office chair(7)"
+}
+OfficeChair {
+  hidden position_0_0 -2.018700680508155e-06
+  hidden rotation_1 0 -0.9999999999999999 0 2.0186536576601052e-06
+  translation -1.8399999996940966 -6.448501605926804e-05 9.939999998935868
+  rotation 4.389182270323194e-06 -0.9999999994913386 -3.1592049583571324e-05 -2.8797953069112685
+  name "office chair(8)"
+}
+Blackboard {
+  translation -0.270025 1.36 11.37
+  rotation 0 1 0 3.14159
+}
+Blackboard {
+  translation 2.94997 1.36 9.33
+  rotation 0 1 0 -1.5707953071795862
+  name "blackboard(1)"
+}
+DEF NedBox SolidBox {
+  translation 0.298865 0.7634887959989994 4.16188
+  rotation 1.0593846667171257e-16 -1 -1.5316617961353594e-16 0.7853950095849122
+  name "NedBox"
+  size 0.015 0.047 0.03
+  appearance PBRAppearance {
+    baseColor 0 0.639216 1
+    roughness 0.5
+    metalness 0
+  }
+  physics Physics {
+    density 2700
+    damping Damping {
+      linear 0
+      angular 0
+    }
+  }
+}
