@@ -19,15 +19,16 @@ conf_file_name = "saved_joints_poses.yaml"
 front_ned_ip_address = "10.10.10.10"  # "192.168.1.26"  # Replace by front Ned ip address
 
 # robot 2
-back_ned_ip_address = "192.168.1.25"  # Replace by back Ned ip address
+back_ned_ip_address = "169.254.200.200"  # Replace by back Ned ip address
 
 # define the height offset of the workspace used by the vision pick method
 z_offset = 0.002
 sleep_joints = [0.0, 0.55, -1.2, 0.0, 0.0, 0.0]
+vision_brightness = 1  # value between 0.5 and 2 to determine how bright the camera vision is
 
 # conveyor
 conveyor_id = ConveyorID.ID_1  # define the id of the conveyor connected to the front Ned
-conveyor_speed = 100  # speed of the conveyor between 0 and 100
+conveyor_speed = 50  # speed of the conveyor between 0 and 100
 conveyor_place_interval = 1.5  # minimal interval between conveyor places  (in seconds)
 rand_drop = 1  # value between 0 and 1 how much random is use to determine the drop position
 
@@ -40,6 +41,8 @@ class RobotsMains:
 
         self.client1 = front_ned
         self.client2 = back_ned
+
+        self.client1.set_brightness(vision_brightness)
 
         self.slope_lock = Lock()
 
@@ -86,7 +89,7 @@ class FrontNed(RobotLoop):
     def robot_loop(self):
         print("Front Ned loop start")
         self.client.update_tool()
-        self.client.open_gripper()
+        self.client.release_with_tool()
         self.client.control_conveyor(self.parent.conveyor_id, False, conveyor_speed, ConveyorDirection.BACKWARD)
 
         while True:
@@ -103,17 +106,17 @@ class FrontNed(RobotLoop):
             self.client.move_joints(*self.saved_joints_poses["client1_intermediate_pos"])  # up
             print("Front Ned | dropping pawn ")
             self.client.move_joints(*self.saved_joints_poses["drop_positions_of_client1"])  # drop
-            self.client.open_gripper()
+            self.client.release_with_tool()
             self.parent.stock += 1
 
-            self.client.move_joints(*self.saved_joints_poses["observation_pose"])
+            self.client.move_joints(*self.saved_joints_poses["client1_observation_pose"])
             self.slope_lock.release()  # set the slope zone as clear
 
             time.sleep(0.1)  # let back_ned to catch the lock
 
     # wait for an object to come on the workspace
     def wait_obj(self):
-        self.client.move_joints(*self.saved_joints_poses["observation_pose"])  # observation
+        self.client.move_joints(*self.saved_joints_poses["client1_observation_pose"])  # observation
         obj_found, pos, shape, color = self.client.detect_object(workspace1, shape=ObjectShape.ANY,
                                                                  color=ObjectColor.ANY)
         if obj_found and pos[0] < 0.90:
@@ -124,6 +127,7 @@ class FrontNed(RobotLoop):
             obj_found, pos, shape, color = self.client.detect_object(workspace1, shape=ObjectShape.ANY,
                                                                      color=ObjectColor.ANY)
             self.parent.conveyor_move_time += time.time() - t
+        time.sleep(0.3)
         self.client.control_conveyor(conveyor_id, False, 0, ConveyorDirection.BACKWARD)
 
 
@@ -134,7 +138,7 @@ class BackNed(RobotLoop):
     def robot_loop(self):
         print("Back Ned loop start")
         self.client.update_tool()
-        self.client.push_air_vacuum_pump()
+        self.client.release_with_tool()
 
         while True:
             print_count = 0
@@ -153,7 +157,7 @@ class BackNed(RobotLoop):
             self.client.move_joints(*self.saved_joints_poses["client2_intermediate_pos"])  # up
             print("Back Ned | grab a pawn ")
             self.client.move_joints(*self.saved_joints_poses["pick_positions_of_client2"])  # grab
-            self.client.pull_air_vacuum_pump()
+            self.client.grasp_with_tool()
             self.parent.stock -= 1
 
             print("Back Ned | going above slope ")
@@ -172,7 +176,7 @@ class BackNed(RobotLoop):
                     break
                 time.sleep(0.1)
 
-            self.client.push_air_vacuum_pump()
+            self.client.release_with_tool()
             self.parent.conveyor_move_time = 0
 
 
@@ -188,11 +192,11 @@ def ask_position():
 
     # the text displayed for each ask
     questions = ["FRONT NED | Set the observation pose so the 4 landmarks are detected",
-                "FRONT NED | A position of a few centimeters above the slope (at the top of the slope) ...",
-                "FRONT NED | The position from which Ned can drop the pawn on the slope ...",
-                "BACK NED | The position from which Ned can grab the pawn at the bottom of the slope ...",
-                "BACK NED | A position a few centimeters above the previous position ...",
-                "BACK NED | A position at the back of the Conveyor Belt where Ned can drop the pawn ..."]
+                 "FRONT NED | A position of a few centimeters above the slope (at the top of the slope) ...",
+                 "FRONT NED | The position from which Ned can drop the pawn on the slope ...",
+                 "BACK NED | The position from which Ned can grab the pawn at the bottom of the slope ...",
+                 "BACK NED | A position a few centimeters above the previous position ...",
+                 "BACK NED | A position at the back of the Conveyor Belt where Ned can drop the pawn ..."]
 
     # name of the position (cannot contain spaces)
     names = ["client1_observation_pose",
@@ -205,13 +209,13 @@ def ask_position():
     # function execute when position is given [function, args...]
     function = [[nothing],
                 [nothing],
-                [client1.open_gripper],
-                [client2.pull_air_vacuum_pump],
+                [client1.release_with_tool],
+                [client2.grasp_with_tool],
                 [nothing],
-                [client2.push_air_vacuum_pump]]
+                [client2.release_with_tool]]
 
     # client from which the position is taken
-    client = [client1, client1, client2, client2, client2]
+    client = [client1, client1, client1, client2, client2, client2]
 
     for question_index in range(len(questions)):
         input(questions[question_index])
@@ -234,14 +238,16 @@ def create_new_workspace():
     print('Setting a new workspace : ')
     points = []
     id_point = 1
-    
-    for id_point in range(5):  # Iterating over 4 markers
+
+    for id_point in range(4):  # Iterating over 4 markers
         input("Press enter when on point".format(id_point + 1))
         # Getting pose
         points.append(client1.get_pose())
+    input("Equip the operating tool")
 
     # Creating workspace
     client1.save_workspace_from_robot_poses(workspace1, *points)
+
 
 # load all the robots pose or ask for new ones
 def load_saved_joint_poses():
@@ -270,7 +276,7 @@ def load_yaml(path_):
             saved_items = {}
         else:
             with open(path_, 'r') as f:
-                saved_items = yaml.load(f)
+                saved_items = yaml.safe_load(f)
         return saved_items
     else:
         print("Empty or missing file: {}".format(path_))
@@ -280,14 +286,13 @@ def load_yaml(path_):
 def main():
     saved_joint_poses = load_saved_joint_poses()  # load all the robots poses
 
-    client1.open_gripper()
-    client2.push_air_vacuum_pump()
+    client1.release_with_tool()
+    client2.release_with_tool()
 
     ws_list = client1.get_workspace_list()
     if workspace1 not in ws_list:
         print('Error : ', workspace1, 'not found in Front Ned workspace list..')
         create_new_workspace()
-        
 
     main_loops = RobotsMains(client1, client2, workspace1, saved_joint_poses)
     main_loops.run()
